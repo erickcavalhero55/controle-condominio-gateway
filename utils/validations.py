@@ -1,4 +1,6 @@
 import re
+from validate_email_address import validate_email
+
 
 def limpa_caracteres(str):
     return re.sub(r'\W', '', str)
@@ -52,3 +54,78 @@ def validar_rg(rg):
 
     # Verifica se o dígito verificador fornecido é válido
     return digito_verificador_fornecido == digito_verificador_esperado
+
+
+def validar_nome(nome):
+    # Verifica se o nome tem pelo menos 2 caracteres
+    if len(nome) < 2:
+        return False
+
+    # Verifica se o nome contém apenas letras e espaços
+    if not re.match("^[a-zA-Z\s]*$", nome):
+        return False
+
+    # Se todas as condições forem atendidas, o nome é válido
+    return True
+
+
+def validar_sobrenome(sobrenome):
+    # Verifica se o sobrenome tem pelo menos 2 caracteres
+    if len(sobrenome) < 2:
+        return False
+
+    # Verifica se o sobrenome contém apenas letras e espaços
+    if not re.match("^[a-zA-Z\s]*$", sobrenome):
+        return False
+
+    # Se todas as condições forem atendidas, o sobrenome é válido
+    return True
+
+
+def validar_telefone(numero):
+    # Remove todos os caracteres que não são dígitos
+    numero = re.sub(r'\D', '', numero)
+
+    # Verifica se o número tem 11 dígitos (formato típico de um número de telefone brasileiro)
+    if len(numero) != 11:
+        return False
+
+    # Se todas as condições forem atendidas, o número de telefone é válido
+    return True
+
+
+def validar_celular(numero):
+    # Remove todos os caracteres que não são dígitos
+    numero = re.sub(r'\D', '', numero)
+
+    # Verifica se o número tem 11 dígitos (formato típico de um número de celular brasileiro)
+    if len(numero) != 11:
+        return False
+
+    # Verifica se o número começa com 9 (indicativo de número de celular no Brasil)
+    if not re.match(r'^11', numero):
+        return False
+
+    # Se todas as condições forem atendidas, o número de celular é válido
+    return True
+
+
+def validar_email(email):
+    try:
+        validate_email(email, verify=True)
+        return True
+    except ValueError:
+        return False
+
+def validar_genero(genero):
+    generos_validos = ['masculino', 'feminino']
+
+    # Converte para minúsculas para facilitar a comparação
+    genero = genero.lower()
+
+    # Verifica se o gênero está na lista de gêneros válidos
+    if genero in generos_validos:
+        return True
+    else:
+        return False
+
