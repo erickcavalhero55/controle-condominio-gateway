@@ -1,17 +1,10 @@
 import requests
 
-url = 'http://54.167.214.72/veiculo/1'
-
-user_cobranca = {
-
-
-
-}
+url = 'http://54.167.214.72/veiculo/'
 
 response = requests.get(url=url, json=user_cobranca)
 
-
-if response.status_code >= 200 and response.status_code <= 299:
+if 200 <= response.status_code <= 299:
 
     print(response.status_code)
     print(response.reason)
@@ -19,3 +12,5 @@ if response.status_code >= 200 and response.status_code <= 299:
 else:
     print(response.status_code)
     print(response.reason)
+
+
